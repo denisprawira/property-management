@@ -1,16 +1,20 @@
-import Sidebar from "./Sidebar"
-import Navbar from "./Navbar"
+import Sidebar from "../Element/Sidebar"
+import Navbar from "../Element/Navbar"
 import { Outlet } from 'react-router-dom';
-
+import { useState } from 'react';
 
 const Dashboard = ()=>{
+
+    const [sidebarToggle,setSidebarToggle]  = useState(false);
+
+    
     return(
         <>
             <div>
-                <Sidebar/>
+                <Sidebar sidebarToggle={sidebarToggle}/>
             </div>
             <div className='flex justify-start flex-col w-full'>
-                <Navbar/>
+                <Navbar setSidebarToggle={setSidebarToggle}/>
                 <div className="p-6 ">
                     <Outlet />
                 </div>

@@ -1,6 +1,6 @@
 import { useEffect,useState } from "react"
 import { Navigate, Outlet, useNavigate } from "react-router-dom";
-import Api from "../../api/Api";
+import Api from "../../../api/Api";
 
 const Property = ()=>{
     const [properties,setProperties] = useState([]);
@@ -31,8 +31,18 @@ const Property = ()=>{
        <section className="antialiased  text-gray-600 h-screen ">
                 <div className="flex flex-col  h-full">
                     <div className="w-full p-6  mx-auto bg-white  rounded-md border border-gray-200">
-                        <header className="flex justify-start px-5 py-4 border-b border-gray-100">
+                        <header className="flex flex-col items-start justify-start px-5 py-4 border-b border-gray-100">
                             <h2 className="font-semibold text-gray-800">Property List</h2>
+                            <div className="flex">
+                            <div className="relative w-full bg-slate-600 lg:max-w-sm">
+                                <select className="w-full p-2.5  text-gray-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600">
+                                    <option className="bg-darkGrey">ReactJS Dropdown</option>
+                                    <option>Laravel 9 with React</option>
+                                    <option>React with Tailwind CSS</option>
+                                    <option>React With Headless UI</option>
+                                </select>
+                        </div>
+                            </div>
                         </header>
                         <div className="p-3">
                             <div className="overflow-x-auto">
@@ -63,7 +73,9 @@ const Property = ()=>{
                                         </tr>
                                     </thead>
                                     <tbody className="text-sm divide-y divide-gray-100">
+                                        
                                         {properties.map(item=>(
+                                            <>
                                             <tr onClick={()=>detailProperty(item)} key={item.number+item.id} className="hover:bg-slate-100 cursor-pointer">
                                                 <td className="p-2 whitespace-nowrap flex text-c">
                                                     {`#${item.number}`}
@@ -73,8 +85,9 @@ const Property = ()=>{
                                                 </td>
                                                 <td className="p-2 whitespace-nowrap">
                                                     <div className="flex flex-col items-start">
-                                                        <div className="font-medium text-left text-gray-800">Alex Shatov</div>
-                                                        <div className="font-medium text-left text-gray-800">Alex Shatov</div>
+
+                                                        <div className="font-medium text-left text-gray-800">{String(item.type.name).toLowerCase() ==="land"? item.land.name: item.building.name}</div>
+                                                        <div className="font-medium text-left text-gray-800">{item.ownershipStatus.display +' - '+item.type.display}</div>
                                                     </div>
                                                 </td>
                                                 <td className="p-2 whitespace-nowrap">
@@ -99,6 +112,7 @@ const Property = ()=>{
                                                     </div>
                                                 </td>
                                             </tr>
+                                            </>
                                         ))}
                                     </tbody>
                                 </table>

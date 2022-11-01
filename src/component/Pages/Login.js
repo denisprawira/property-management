@@ -1,25 +1,34 @@
-import LeftSideBg from "../assets/leftSide.png"
-import Logo from "../assets/VBM-Logo.png"
+import LeftSideBg from "../../assets/leftSide.png"
+import Logo from "../../assets/VBM-Logo.png"
 import { useState } from "react";
 import { Navigate } from 'react-router-dom';
-
-
+import Api from '../../api/Api';
+ 
 const Login =()=>{
 
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
-    const pass = localStorage.getItem('password');
+    const pass = localStorage.getItem("access-data");
+    
+    const api = new Api();
+    const login = () => {
+      api
+        .signIn({
+          email: email,
+          password: password
+        })
+        .then((response) =>{
+            localStorage.setItem("access-data",response.data.results);
+            console.log(response.data.results);
+        })
+        .catch((err) => console.log(err));
+    };
+
+
     if(pass){
         return <Navigate  to="/dashboard" />    
     }
 
-
-
-    function login(){
-        console.log(email,password)
-        localStorage.setItem('password', password);
-        <Navigate  to="/dashboard" />   
-    }
 
     return (
          <div className="flex w-full h-full  max-sm:justify-center max-sm:items-center ">
@@ -34,11 +43,11 @@ const Login =()=>{
                 <p className="my-4">Sign in to your account below</p>
                 <div className=" w-full flex flex-col items-start">
                     <div className="mb-6 flex flex-col items-start w-full">
-                        <label for="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email</label>
+                        <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email</label>
                         <input type="email" id="email" onChange={(e)=>setEmail(e.target.value)} className="bg-gray-50 border w-full border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Type your email here" required/>
                     </div>
                     <div className="mb-6 flex flex-col items-start w-full">
-                        <label for="password" className="block mb-2 text-sm font-medium  text-gray-900 dark:text-gray-300">Password</label>
+                        <label htmlFor="password" className="block mb-2 text-sm font-medium  text-gray-900 dark:text-gray-300">Password</label>
                         <input type="password" id="password" onChange={(e)=>setPassword(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Type your password here" required/>
                     </div>
 

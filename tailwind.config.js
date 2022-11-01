@@ -12,6 +12,7 @@ module.exports = {
 
         ghostWhite: '#F9F9FC',
         //text color
+        lightGrey: '#6F708B',
         darkGrey: '#26273B',
         echoBlue: '#ACADC1',
         skyBlue: '#3D5CE6',
