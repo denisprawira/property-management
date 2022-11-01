@@ -1,12 +1,16 @@
 import Sidebar from "../Element/Sidebar"
 import Navbar from "../Element/Navbar"
-import { Outlet } from 'react-router-dom';
+import { Outlet,useNavigate,Navigate } from 'react-router-dom';
 import { useState } from 'react';
 
+
 const Dashboard = ()=>{
-
+    const navigate = useNavigate();
     const [sidebarToggle,setSidebarToggle]  = useState(false);
-
+    const pass = localStorage.getItem("access-data");
+    if(!pass){
+        return <Navigate  to="/" />   
+    }
     
     return(
         <>

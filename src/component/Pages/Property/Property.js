@@ -34,7 +34,7 @@ const Property = ()=>{
                         <header className="flex flex-col items-start justify-start px-5 py-4 border-b border-gray-100">
                             <h2 className="font-semibold text-gray-800">Property List</h2>
                             <div className="flex">
-                            <div className="relative w-full bg-slate-600 lg:max-w-sm">
+                            <div className="relative w-full  lg:max-w-sm">
                                 <select className="w-full p-2.5  text-gray-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600">
                                     <option className="bg-darkGrey">ReactJS Dropdown</option>
                                     <option>Laravel 9 with React</option>

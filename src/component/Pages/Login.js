@@ -1,15 +1,14 @@
 import LeftSideBg from "../../assets/leftSide.png"
 import Logo from "../../assets/VBM-Logo.png"
 import { useState } from "react";
-import { Navigate } from 'react-router-dom';
+import { Navigate,useNavigate } from 'react-router-dom';
 import Api from '../../api/Api';
- 
-const Login =()=>{
 
+const Login =()=>{
+    const navigate = useNavigate();
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
     const pass = localStorage.getItem("access-data");
-    
     const api = new Api();
     const login = () => {
       api
@@ -18,8 +17,11 @@ const Login =()=>{
           password: password
         })
         .then((response) =>{
-            localStorage.setItem("access-data",response.data.results);
-            console.log(response.data.results);
+            if(response.data.status==="success"){
+                localStorage.setItem("access-data",JSON.stringify(response.data.results));
+                navigate("/dashboard");
+            }
+
         })
         .catch((err) => console.log(err));
     };
